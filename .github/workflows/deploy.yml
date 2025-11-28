@@ -18,5 +18,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          vars: |
+            D1_DATABASE_ID:${{ secrets.D1_DATABASE_ID }}
         env:
           D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
