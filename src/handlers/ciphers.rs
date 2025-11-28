@@ -164,7 +164,7 @@ pub async fn delete_cipher(
 ) -> Result<Json<()>, AppError> {
     let db = db::get_db(&env)?;
 
-    let res = query!(
+    let _res = query!(
         &db,
         "DELETE FROM ciphers WHERE id = ?1 AND user_id = ?2",
         id,

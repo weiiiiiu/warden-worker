@@ -23,7 +23,7 @@ pub async fn backup_to_jianguoyun(env: &Env) -> Result<String> {
     let url = format!("https://dav.jianguoyun.com{}/{}", webdav_path, filename);
     let auth = BASE64.encode(format!("{}:{}", webdav_user, webdav_pass));
     
-    let mut headers = Headers::new();
+    let headers = Headers::new();
     headers.set("Authorization", &format!("Basic {}", auth))?;
     headers.set("Content-Type", "application/json")?;
     

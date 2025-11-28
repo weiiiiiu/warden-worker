@@ -71,7 +71,7 @@ pub async fn register(
         updated_at: now,
     };
 
-    let query = query!(
+    let _query = query!(
         &db,
         "INSERT INTO users (id, name, email, master_password_hash, key, private_key, public_key, kdf_iterations, security_stamp, created_at, updated_at)
          VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)",
@@ -86,12 +86,12 @@ pub async fn register(
          user.security_stamp,
          user.created_at,
          user.updated_at
-    ).map_err(|error|{
+    ).map_err(|_error|{
         AppError::Database
     })?
     .run()
     .await
-    .map_err(|error|{
+    .map_err(|_error|{
         AppError::Database
     })?;
 
