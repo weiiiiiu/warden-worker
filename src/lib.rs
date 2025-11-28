@@ -3,6 +3,7 @@ use tower_service::Service;
 use worker::*;
 
 mod auth;
+mod backup;
 mod crypto;
 mod db;
 mod error;
@@ -29,4 +30,15 @@ pub async fn main(
     let mut app = router::api_router(env).layer(cors);
 
     Ok(app.call(req).await?)
+}
+
+/// 定时任务：每天自动备份到坚果云
+#[event(scheduled)]
+pub async fn scheduled(_event: ScheduledEvent, env: Env, _ctx: ScheduleContext) {
+    console_log!("Starting scheduled backup...");
+    
+    match backup::backup_to_jianguoyun(&env).await {
+        Ok(msg) => console_log!("Scheduled backup completed: {}", msg),
+        Err(e) => console_error!("Scheduled backup failed: {:?}", e),
+    }
 }

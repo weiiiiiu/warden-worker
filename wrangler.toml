@@ -9,3 +9,7 @@ command = "cargo install -q worker-build && worker-build --release"
 binding = "vault1"
 database_name = "vault1"
 database_id = "${D1_DATABASE_ID}"
+
+# 定时备份：每天 UTC 时间 2:00 (北京时间 10:00)
+[triggers]
+crons = ["0 2 * * *"]
