@@ -34,5 +34,6 @@ pub fn api_router(env: Env) -> Router {
         .route("/api/folders/{id}", put(folders::update_folder))
         .route("/api/folders/{id}", delete(folders::delete_folder))
         .route("/api/config", get(config::config))
+        .route("/api/backup", post(handlers::backup::manual_backup))
         .with_state(app_state)
 }
